@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Data</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        #dataDisplay {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">Received Data</h1>
+
+    <div class="form-group mt-3">
+        <label for="urlDropdown">Select URL:</label>
+        <select id="urlDropdown" class="form-control"></select>
+    </div>
+
+    <div id="dataDisplay" class="mt-3"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlDropdown = document.getElementById('urlDropdown');
+        const dataDisplay = document.getElementById('dataDisplay');
+
+        // Fetch URLs from the server
+        fetch('http://eiei01.vercel.app/api/receive')
+            .then(response => response.json())
+            .then(data => {
+                // Populate dropdown with URLs
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.url;
+                    option.textContent = item.url;
+                    urlDropdown.appendChild(option);
+                });
+
+                // Trigger initial data display
+                displayData(urlDropdown.value);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+
+        // Add change event listener to the dropdown
+        urlDropdown.addEventListener('change', function () {
+            const selectedUrl = urlDropdown.value;
+            displayData(selectedUrl);
+        });
+
+        // Function to display data for a selected URL
+        function displayData(url) {
+            // Fetch data for the selected URL
+            fetch('http://localhost:7122/api/receive')
+                .then(response => response.json())
+                .then(data => {
+                    // Filter data for the selected URL
+                    const filteredData = data.filter(item => item.url === url);
+
+                    // Display data in the dataDisplay div
+                    dataDisplay.innerHTML = '';
+                    filteredData.forEach(item => {
+                        const dataItem = document.createElement('div');
+                        dataItem.textContent = JSON.stringify(item.data);
+                        dataDisplay.appendChild(dataItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        // Periodically update data every 5 seconds (adjust as needed)
+        setInterval(() => {
+            const selectedUrl = urlDropdown.value;
+            displayData(selectedUrl);
+        }, 5000);
+    });
+</script>
+
+</body>
+</html>
