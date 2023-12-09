@@ -18,7 +18,7 @@
 <body>
 
 <div class="container">
-    <h1 class="mt-5">你好，你在這裡做什麼</h1>
+    <h1 class="mt-5">Received Data</h1>
 
     <div class="form-group mt-3">
         <label for="urlDropdown">Select URL:</label>
@@ -34,7 +34,7 @@
         const dataDisplay = document.getElementById('dataDisplay');
 
         // Fetch URLs from the server
-        fetch('http://eiei01.vercel.app/api/receive')
+        fetch('https://eiei01.vercel.app/api/receive') // Use HTTPS
             .then(response => response.json())
             .then(data => {
                 // Populate dropdown with URLs
@@ -61,7 +61,7 @@
         // Function to display data for a selected URL
         function displayData(url) {
             // Fetch data for the selected URL
-            fetch('http://eiei01.vercel.app/api/receive')
+            fetch('https://eiei01.vercel.app/api/receive') // Use HTTPS
                 .then(response => response.json())
                 .then(data => {
                     // Filter data for the selected URL
