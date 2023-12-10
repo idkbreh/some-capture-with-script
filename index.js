@@ -20,6 +20,7 @@ app.post('/api/jookgru', (req, res) => {
     const { url, data } = req.body;
     console.log('Captured POST request:', { url, data });
     postData.push({ url, data });
+    sendLineNotification(data)
     res.status(200).send('Data received successfully');
 });
 
@@ -33,3 +34,24 @@ app.get('/',IndexPage)
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+
+function sendLineNotification(message) {
+    const urlLineNotification = 'https://notify-api.line.me/api/notify';
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${process.env.TOKEN}`
+    };
+    const body = new URLSearchParams();
+    body.append('message', message);
+    fetch(urlLineNotification, {
+        method: 'POST',
+        headers: headers,
+        body: body,
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('There was a problem with the fetch operation:', error));
+}
