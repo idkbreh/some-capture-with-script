@@ -17,7 +17,6 @@ app.use(cors()); // CORS
 dotenv.config();
 let postData = [];
 
-
 app.post('/api/jookgru', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const { url, data } = req.body;
