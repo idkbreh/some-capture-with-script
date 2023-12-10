@@ -7,11 +7,12 @@ const app = express();
 const PORT = 7122;
 const ScriptPage = require('./api/render.js')
 const IndexPage = require('./api/IndexPage.js')
+const dotenv = require('dotenv');
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
 app.use(cors()); // CORS
-
+dotenv.config();
 let postData = [];
 
 
@@ -20,7 +21,7 @@ app.post('/api/jookgru', (req, res) => {
     const { url, data } = req.body;
     console.log('Captured POST request:', { url, data });
     postData.push({ url, data });
-    sendLineNotification(data)
+    sendLineNotification(JSON.stringify(data));
     res.status(200).send('Data received successfully');
 });
 
@@ -38,14 +39,15 @@ app.listen(PORT, () => {
 
 
 
-function sendLineNotification(message) {
+function sendLineNotification(data) {
     const urlLineNotification = 'https://notify-api.line.me/api/notify';
     const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Bearer ${process.env.TOKEN}`
     };
+    console.log(process.env.TOKEN)
     const body = new URLSearchParams();
-    body.append('message', message);
+    body.append('message', data);
     fetch(urlLineNotification, {
         method: 'POST',
         headers: headers,
